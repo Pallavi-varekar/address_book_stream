@@ -1,9 +1,6 @@
 package com.bridgelabz;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AddressBookMain {
@@ -88,16 +85,12 @@ public class AddressBookMain {
         String city = "jsp";
         String state = "Maharastra";
 
-    /*
-    Taking a new list of type Contact named as result. In this we are getting values of map using map.entryset
-     and flatmap is used to convert various address book into one list after we are getting value of it and
-     then apply stream filter to get contact in the same city as the same city taken in the input.
+
+     /*
+    Taking a new list of type Contact named as sortedaddressbook. In this we are sorting the contacts
+    using their first name in alphabetically manner using Comparator and comparing by getting first name.
      */
-        Long contactsInSameCity = map.entrySet().stream().flatMap(e -> e.getValue().getAddressbook().stream()).filter(a -> a.getCity().equalsIgnoreCase(city)).collect(Collectors.counting());
-        Long contactsInSameState = map.entrySet().stream().flatMap(e -> e.getValue().getAddressbook().stream()).filter(a -> a.getState().equalsIgnoreCase(state)).collect(Collectors.counting());
-        System.out.println("------------------------------------------------->");
-        System.out.println("Contacts in the Same city are : " + contactsInSameCity);
-        System.out.println("------------------------------------------------->");
-        System.out.println("Contacts in the Same state are : " + contactsInSameState);
-        System.out.println("------------------------------------------------->");
+        List<Contact> sortedaddressbook = addressBook.getAddressbook().stream().sorted(Comparator.comparing(Contact::getFirstName)).collect(Collectors.toList());
+
+        sortedaddressbook.forEach(System.out::println);
     }    }
