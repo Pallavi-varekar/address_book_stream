@@ -85,22 +85,19 @@ public class AddressBookMain {
         map.put("addressBook2", addressBook2);
         map.put("addressBook3", addressBook3);
         map.put("addressBook4", addressBook4);
-        String city = "delhi";
-        String state = "haryana";
+        String city = "jsp";
+        String state = "Maharastra";
 
     /*
     Taking a new list of type Contact named as result. In this we are getting values of map using map.entryset
      and flatmap is used to convert various address book into one list after we are getting value of it and
      then apply stream filter to get contact in the same city as the same city taken in the input.
      */
-        List<Contact> contactsInSameCity = map.entrySet().stream().flatMap(e -> e.getValue().getAddressbook().stream()).filter(a -> a.getCity().equalsIgnoreCase(city)).collect(Collectors.toList());
-        List<Contact> contactsInSameState = map.entrySet().stream().flatMap(e -> e.getValue().getAddressbook().stream()).filter(a -> a.getState().equalsIgnoreCase(state)).collect(Collectors.toList());
+        Long contactsInSameCity = map.entrySet().stream().flatMap(e -> e.getValue().getAddressbook().stream()).filter(a -> a.getCity().equalsIgnoreCase(city)).collect(Collectors.counting());
+        Long contactsInSameState = map.entrySet().stream().flatMap(e -> e.getValue().getAddressbook().stream()).filter(a -> a.getState().equalsIgnoreCase(state)).collect(Collectors.counting());
         System.out.println("------------------------------------------------->");
-        System.out.println("Contacts in the Same city are :");
-        contactsInSameCity.stream().forEach(x -> System.out.println(x));
-        System.out.println();
+        System.out.println("Contacts in the Same city are : " + contactsInSameCity);
         System.out.println("------------------------------------------------->");
-        System.out.println("Contacts in the Same state are :");
-        contactsInSameState.stream().forEach(x -> System.out.println(x));
+        System.out.println("Contacts in the Same state are : " + contactsInSameState);
         System.out.println("------------------------------------------------->");
     }    }
